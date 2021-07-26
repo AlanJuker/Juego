@@ -1,7 +1,7 @@
 function Boundary(x,y,w,h,a){
     var options = {
-        friction: 0.5,
-        restitution: 0.5,
+        friction: 0,
+        restitution: 0,
         angle: a,
         isStatic: true
     }

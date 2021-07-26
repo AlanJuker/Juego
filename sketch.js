@@ -23,6 +23,8 @@ function setup(){
     engine = Engine.create();
     var canvas = createCanvas(1480,700);
     engine.world.gravity.y = 0;
+    engine.world.gravity.x = 0;
+
     world = engine.world;
     //Engine.run(engine);
 

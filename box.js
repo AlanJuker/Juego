@@ -1,7 +1,7 @@
 function Particle(x,y,r,fixed){
     var options = {
-        friction: 0.5,
-        restitution: 0.5,
+        friction: 0,
+        restitution: 0,
         isStatic: fixed
     }
     this.body = Bodies.circle(x,y,r,options);
