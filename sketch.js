@@ -21,7 +21,7 @@ var mConstraint;
 function setup(){
     
     engine = Engine.create();
-    var canvas = createCanvas(1530,730);
+    var canvas = createCanvas(1480,700);
     engine.world.gravity.y = 0;
     world = engine.world;
     //Engine.run(engine);
@@ -80,16 +80,16 @@ function setup(){
 
 
 function keyPressed(){
-    if(keyIsDown(LEFT_ARROW)){        
+    if(keyIsDown(LEFT_ARROW) || keyIsDown(65)){        
         particles[0].izquierda();
     }
-    if(keyIsDown(RIGHT_ARROW)){
+    if(keyIsDown(RIGHT_ARROW) || keyIsDown(68)){
         particles[0].derecha();
     }
-    if(keyIsDown(UP_ARROW)){
+    if(keyIsDown(UP_ARROW) || keyIsDown(87)){
         particles[0].arriba();
     }
-    if(keyIsDown(DOWN_ARROW)){
+    if(keyIsDown(DOWN_ARROW) || keyIsDown(83)){
         particles[0].abajo();
     }
 }
