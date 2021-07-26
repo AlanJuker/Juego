@@ -12,16 +12,22 @@ var world;
 
 
 var particles = [];
-var boundaries = [];    
+var boundaries = [];   
+var barras = []; 
 
 var ground;
 
 var mConstraint;
 
+let img;
+var ancho = 1480;
+var largo = 700;
+
 function setup(){
     
+    img = loadImage('/img/fondo.svg');
     engine = Engine.create();
-    var canvas = createCanvas(1480,700);
+    var canvas = createCanvas(ancho,largo);
     engine.world.gravity.y = 0;
     engine.world.gravity.x = 0;
 
@@ -55,11 +61,15 @@ function setup(){
     //var p2 = new Particle(200,150,10);
     /*particles.push(p2);*/
 
+    for(var x = 80; x<240; x+=40){
+        var barra = new Barra(x,80,25,0);
+        barras.push(barra);
+    }
 
-    var arriba = new Boundary(width/2, 0+35, width, 70, 0),
-    abajo = new Boundary(width/2, height-35, width, 70, 0),
-    izquierda = new Boundary(0+35, height/2, width, 70, 1.5708),
-    derecha = new Boundary(width-35, height/2, width, 70, 1.5708);
+    var arriba = new Boundary(width/2, 0+20, width, 40, 0),
+    abajo = new Boundary(width/2, height-20, width, 40, 0),
+    izquierda = new Boundary(0+20, height/2, width, 40, 1.5708),
+    derecha = new Boundary(width-20, height/2, width, 40, 1.5708);
 
     boundaries.push(abajo);
     boundaries.push(izquierda);
@@ -102,6 +112,8 @@ function keyPressed(){
 
 function draw(){
     background(122, 206, 103);
+    image(img,0,0,ancho+120,largo);
+
     Engine.update(engine);
     for(var i=0; i<particles.length; i++){
         particles[i].show();
@@ -115,6 +127,10 @@ function draw(){
     
     for(var i=0; i<boundaries.length; i++){
         boundaries[i].show();
+    }
+
+    for(var i=0; i<barras.length; i++){
+        barras[i].show();
     }
 
     //line(particles[0].body.position.x, particles[0].body.position.y,particles[1].body.position.x, particles[1].body.position.y);
