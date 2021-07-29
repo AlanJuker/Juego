@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&family=Style+Script&display=swap');
+
+
 body{
     padding: 0;  
-    margin: 20px auto;
+    margin: 0 ;
+}
+p{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
 }

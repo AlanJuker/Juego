@@ -1,9 +1,10 @@
-function Particle(x,y,r,fixed){
+function Particle(x,y,r,fixed,img2){
     var options = {
         friction: 0,
         restitution: 0,
         isStatic: fixed
     }
+    this.col = color(255, 227, 179);
     this.body = Bodies.circle(x,y,r,options);
     this.r = r;
     World.add(world,this.body);
@@ -39,8 +40,10 @@ function Particle(x,y,r,fixed){
         rotate(angle);
         rectMode(CENTER);
         noStroke();
-        fill(255, 227, 179);
+        fill(255,0,0,0);
+        image(img2,0-r/2-r,0-r/2-r, r*3,r*3);
         ellipse(0,0,this.r*2);
         pop();
     }
+
 }

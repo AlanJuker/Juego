@@ -9,25 +9,33 @@ Body = Matter.Body;
 
 var engine;
 var world;
-
+var j=1;
+var inicio = false;
 
 var particles = [];
 var boundaries = [];   
-var barras = []; 
+//var barras = []; 
+//var barrasB = []; 
 
 var ground;
 
 var mConstraint;
 
 let img;
-var ancho = 1480;
-var largo = 700;
+let img2;
+let img3;
+var ancho =  window.innerWidth-30;
+var largo = window.innerHeight-30;
 
 function setup(){
     
-    img = loadImage('/img/fondo.svg');
+    img = loadImage('/img/fondo.jpg');
+    img2 = loadImage('/img/alien.png');
+    img3 = loadImage('/img/senior.png');
     engine = Engine.create();
     var canvas = createCanvas(ancho,largo);
+
+    
     engine.world.gravity.y = 0;
     engine.world.gravity.x = 0;
 
@@ -60,25 +68,37 @@ function setup(){
 
     //var p2 = new Particle(200,150,10);
     /*particles.push(p2);*/
-
-    for(var x = 80; x<240; x+=40){
+    /*for(var x = 80; x<240; x+=40){
         var barra = new Barra(x,80,25,0);
         barras.push(barra);
-    }
-
-    var arriba = new Boundary(width/2, 0+20, width, 40, 0),
-    abajo = new Boundary(width/2, height-20, width, 40, 0),
-    izquierda = new Boundary(0+20, height/2, width, 40, 1.5708),
-    derecha = new Boundary(width-20, height/2, width, 40, 1.5708);
+        var barra = new Barra(x,80,25,0);
+        barrasB.push(barra);
+    }*/
+    var arriba = new Boundary(width/2, 0+15, width, 30, 0),
+    abajo = new Boundary(width/2, height-15, width, 30, 0),
+    izquierda = new Boundary(0+15, height/2, width, 30, 1.5708),
+    derecha = new Boundary(width-15, height/2, width, 30, 1.5708);
 
     boundaries.push(abajo);
-    boundaries.push(izquierda);
-    boundaries.push(arriba);
-    boundaries.push(derecha);
+    World.add(world, arriba);
 
-    var p = new Particle(36,100,25, false);
+    boundaries.push(izquierda);
+    World.add(world, abajo);
+
+    boundaries.push(arriba);
+    World.add(world, izquierda);
+
+    boundaries.push(derecha);
+    World.add(world, derecha);
+
+
+    var p = new Particle(36,100,50, false, img2);
     particles.push(p);
     World.add(world, p);
+
+    var p2 = new Caja(random(30,ancho-100),random(30,largo-100),50, false, img3);
+    particles.push(p2);
+    World.add(world, p2);
 
 
     var canvasMouse = Mouse.create(canvas.elt);
@@ -86,8 +106,13 @@ function setup(){
     var options = {
         mouse: canvasMouse
     }
+
     mConstraint = MouseConstraint.create(engine, options);
     World.add(world, mConstraint);
+}
+
+function enemies(){
+
 }
 
 
@@ -104,16 +129,16 @@ function keyPressed(){
     if(keyIsDown(DOWN_ARROW) || keyIsDown(83)){
         particles[0].abajo();
     }
+
 }
 
-/*function mouseDragged(){
-    circles.push(new Circle(mouseX,mouseY,random(5,10)));
-}*/
+
 
 function draw(){
+
+    console.log("a");
     background(122, 206, 103);
     image(img,0,0,ancho+120,largo);
-
     Engine.update(engine);
     for(var i=0; i<particles.length; i++){
         particles[i].show();
@@ -128,10 +153,28 @@ function draw(){
     for(var i=0; i<boundaries.length; i++){
         boundaries[i].show();
     }
+    
 
-    for(var i=0; i<barras.length; i++){
-        barras[i].show();
-    }
+    /*for(var i=0; i<barras.length; i++){         
+        barras[i].show(); 
+    }*/
+
+    var d = dist(particles[0].body.position.x, particles[0].body.position.y, particles[1].body.position.x, particles[1].body.position.y);
+      // now see if distance between two is less than sum of two radius'
+      console.log(d,"< ",particles[0].r + particles[1].h/2 + 20);
+      console.log(d < particles[0].r + particles[1].r);
+        if (d < particles[0].r + particles[1].h/2 +10) {
+            particles[1].removeFrowWorld();        
+            particles.splice(1,1);        
+            removeElements();
+            let p = createP(j++);
+            p.position(ancho-140,15);
+
+            var p2 = new Caja(random(30,ancho-100),random(30,largo-100),50, false, img3);
+            particles.push(p2);
+            World.add(world, p2);
+        }
+   
 
     //line(particles[0].body.position.x, particles[0].body.position.y,particles[1].body.position.x, particles[1].body.position.y);
 
