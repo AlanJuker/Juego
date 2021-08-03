@@ -10,9 +10,7 @@ function Boundary(x,y,w,h,a){
     this.w = w;
     this.h = h;
     World.add(world,this.body);
-
-
-
+    
     this.show = function(){
         var pos = this.body.position;
         var angle = this.body.angle;
