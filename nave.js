@@ -1,4 +1,4 @@
-function Particle(x,y,r,fixed,img2){
+function Nave(x,y,r,fixed,img2){
     var options = {
         friction: 0,
         restitution: 0,
@@ -7,7 +7,6 @@ function Particle(x,y,r,fixed,img2){
     this.col = color(255, 227, 179);
     this.body = Bodies.circle(x,y,r,options);
     this.r = r;
-    var k=0;
     World.add(world,this.body);
 
     this.arriba =  function () {
@@ -38,7 +37,7 @@ function Particle(x,y,r,fixed,img2){
 
         push();
         translate(pos.x, pos.y);
-        rotate(k+=0.03);
+        rotate(angle);
         rectMode(CENTER);
         noStroke();
         fill(255,0,0,0);

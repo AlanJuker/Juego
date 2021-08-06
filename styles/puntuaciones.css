@@ -1,0 +1,16 @@
+/*body{
+    background: url("/img/fondo.svg") #CCC no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}*/
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
