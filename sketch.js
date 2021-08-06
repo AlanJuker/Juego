@@ -142,8 +142,8 @@ function draw(){
     for(let i=0; i<enemies.length; i++){
         var de = dist(nave.body.position.x, nave.body.position.y, enemies[i].body.position.x, enemies[i].body.position.y);
         if (de < nave.r + enemies[i].r) {
-            alert("Tu puntaje es de: "+j+" puntos");
             location.href = "puntuaciones.html";
+            alert("Tu puntaje es de: "+j+" puntos");
         }
     }
     for(let i=0; i<powerups.length; i++){
